@@ -1,0 +1,48 @@
+Dart Frog + VS Code / Cursor — GUI-first
+=========================================
+
+Flutter vs `dart` in the integrated terminal
+---------------------------------------------
+`flutter --version` uses Dart inside your Flutter install (cache). The command `dart` uses **PATH** order: **first match wins**.
+
+Check (PowerShell):
+
+  where.exe dart
+
+If the **first** line is something like `C:\tools\dart-sdk\bin\dart.exe`, that standalone SDK (often older) runs before Flutter’s `...\flutter\bin\dart`. That is exactly why `dart pub get` in `packages/todos_data_source` fails while Flutter reports a newer Dart.
+
+**Permanent fix (recommended):** Windows → *Environment variables* → **Path** (User or System) → **Remove** or **move below** Flutter the entry `C:\tools\dart-sdk\bin` (or whatever path `where` shows first). Restart terminals (or sign out) so PATH reloads.
+
+**This repo:** `.vscode/settings.json` prepends `...\dev\flutter\bin` to the **integrated** terminal PATH and sets `dart.flutterSdkPath`. **Edit** the Flutter path if yours differs. Then **Developer: Reload Window** (or restart Cursor) and open a **new** terminal.
+
+**Quick fix for the current shell only (PowerShell):**
+
+  $env:PATH = "C:\Users\Elitebook\Desktop\dev\flutter\bin;$env:PATH"
+  dart --version
+
+Run the app (HTTP, watcher)
+----------------------------
+- Use the Dart Frog extension: **Run server** (or its command palette entry).
+- That keeps `dart_frog dev` going — good for Postman and route watching.
+- Your `Get-NetTCPConnection ... no matching objects` line only means **nothing is listening on that port** (server not running, or different port).
+
+Debug with F5 (Dart debugger)
+------------------------------
+- Stop the extension dev server first (or run task below), or you’ll fight for port 8080.
+- Pick **Dart Frog: debug dev server** — needs `.dart_frog/server.dart` (extension dev run creates it).
+- After `dart_frog build`: use **Dart Frog: debug build output** (`build/bin/server.dart`).
+
+Optional tasks (no typing paths in a terminal)
+---------------------------------------------
+- Ctrl+Shift+P → **Tasks: Run Task**
+  - **Dart Frog: free ports (8080/8181/8182)** — runs `scripts/kill_dev_ports.ps1`
+  - **Dart Frog: refresh .dart_frog codegen** — runs `scripts/ensure_dart_frog_codegen.ps1` if you need codegen without the extension
+
+Scripts (same as tasks; keep when copying projects)
+---------------------------------------------------
+- scripts/kill_dev_ports.ps1
+- scripts/ensure_dart_frog_codegen.ps1
+
+Copy to a new repo: .vscode/settings.json, .vscode/launch.json, .vscode/tasks.json, .vscode/extensions.json, scripts/*.ps1, this file.
+
+Refs: https://dartfrog.vgv.dev  |  https://dart.dev/docs  |  https://docs.flutter.dev

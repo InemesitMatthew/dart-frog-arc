@@ -1,0 +1,15 @@
+dart_frog new route "/hello"  // creates a new route handler for the path "/hello"
+dart_frog new middleware "/hello" // creates a new middleware handler for the path "/hello"
+
+// See who owns a port
+netstat -ano | findstr "LISTENING" | findstr ":8081 :8181"
+
+the last column is the PID 
+
+// Kill by PID 
+taskkill /F /PID <PID>
+
+// Kill every dart.exe process
+Get-Process dart -ErrorAction SilentlyContinue | Stop-Process -Force
+
+

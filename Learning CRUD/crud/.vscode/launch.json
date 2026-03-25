@@ -1,0 +1,19 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Dart Frog: debug dev server",
+            "request": "launch",
+            "type": "dart",
+            "cwd": "${workspaceFolder}",
+            "program": "${workspaceFolder}/.dart_frog/server.dart"
+        },
+        {
+            "name": "Dart Frog: debug build output",
+            "request": "launch",
+            "type": "dart",
+            "cwd": "${workspaceFolder}",
+            "program": "${workspaceFolder}/build/bin/server.dart"
+        }
+    ]
+}
