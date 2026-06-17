@@ -23,7 +23,6 @@ coverage/
 .env.*
 !.env.example
 branch_structure.json
-.gitignore
 
 .vscode/
 public/fonts/
